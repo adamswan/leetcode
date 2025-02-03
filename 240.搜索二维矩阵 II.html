@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let matrix = [
+        [1, 4, 7, 11, 15],
+        [2, 5, 8, 12, 19],
+        [3, 6, 9, 16, 22],
+        [10, 13, 14, 17, 24],
+        [18, 21, 23, 26, 30],
+      ];
+
+      let target = 5;
+
+      function getval(twoArr, target) {
+        let top = 0; // 上边界
+        let bottom = twoArr.length - 1; // 下边界
+        let left = 0; // 左边界
+        let right = twoArr[0].length - 1; // 右边界
+
+        while (top <= bottom && left <= right) {
+          let current = twoArr[top][right];
+
+          if (current < target) {
+            // 说明当前值小了，要将当前值变大，所以将 top 边界向下移动
+            top++;
+          } else if (current > target) {
+            // 说明当前值大了，要将当前值变小，所以将 right 边界向左移动
+            right--;
+          } else {
+            return true;
+          }
+        }
+        return false;
+      }
+
+      console.log(getval(matrix, target));
+    </script>
+  </body>
+</html>
