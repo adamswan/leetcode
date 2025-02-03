@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [1, 2, 3, 4];
+      // 输出: [24, 12, 8, 6]
+
+      function getval(arr) {
+        let res = [];
+        let left = [];
+        let right = [];
+
+        let start = 1;
+
+        for (let i = 0; i < arr.length; i++) {
+          let item = arr[i];
+          start = start * item;
+          left[i] = start;
+        }
+        console.log("left", left);
+
+        start = 1;
+
+        for (let j = arr.length - 1; j >= 0; j--) {
+          let item = arr[j];
+          start = start * item;
+          right[j] = start;
+        }
+        console.log("right", right);
+
+        for (let i = 0; i < arr.length; i++) {
+          if (i === 0) {
+            res[i] = 1 * right[i + 1];
+            continue;
+          }
+
+          if (i === arr.length - 1) {
+            res[i] = left[i - 1] * 1;
+            continue;
+          }
+
+          res[i] = left[i - 1] * right[i + 1];
+        }
+
+        return res;
+      }
+
+      console.log(getval(arr));
+    </script>
+  </body>
+</html>
