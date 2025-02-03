@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let matrix = [
+        [1, 1, 1],
+        [1, 0, 1],
+        [1, 1, 1],
+      ];
+
+      //   输出：
+      //   let out = [
+      //     [1, 0, 1],
+      //     [0, 0, 0],
+      //     [1, 0, 1],
+      //   ];
+
+      function setZeroes(twoArr) {
+        let firstRowHas_0 = false; // 标记第一行是否有0
+        let firstColHas_0 = false; // 标记第一列是否有0
+
+        // 外层数组最后一个成员的索引
+        let m = twoArr.length - 1;
+
+        // 内层数组最后一个成员的索引
+        let n = twoArr[0].length - 1;
+
+        // 判断第一行是否有0，如果只要有1个0就可以brrak了，因为这行都会被赋值为0
+        for (let i = 0; i <= n; i++) {
+          // 第一行的范围就是内层数组的 n
+          let item = twoArr[0][i];
+          if (item === 0) {
+            firstRowHas_0 = true;
+            break;
+          }
+        }
+
+        // 判断第一列是否有0，如果只要有1个0就可以brrak了，因为这列都会被赋值为0
+        for (let i = 0; i <= m; i++) {
+          // 第一列的范围就是外层数组的 m
+          let item = twoArr[i][0];
+          if (item === 0) {
+            firstColHas_0 = true;
+            break;
+          }
+        }
+
+        // 遍历非第1行、非第1列的元素，找出为0的元素,
+        // 并将为 0 元素在第1行、第1列对应的成员赋值为0
+        for (let i = 1; i <= m; i++) {
+          for (let j = 1; j <= n; j++) {
+            if (twoArr[i][j] === 0) {
+              twoArr[i][0] = 0;
+              twoArr[0][j] = 0;
+            }
+          }
+        }
+
+        // 再遍历非第1行、第1列的元素，将有0的行、列都赋值为0
+        for (let i = 1; i <= m; i++) {
+          for (let j = 1; j <= n; j++) {
+            if (twoArr[i][0] === 0 || twoArr[0][j] === 0) {
+              twoArr[i][j] = 0;
+            }
+          }
+        }
+
+        // 如果第一行有0，则单独处理第1行：将第1行都赋值为0
+        if (firstRowHas_0 === true) {
+          for (let i = 0; i <= n; i++) {
+            twoArr[0][i] = 0;
+          }
+        }
+
+        // 如果第一列有0，则单独处理第1列：将第1列都赋值为0
+        if (firstColHas_0 === true) {
+          for (let i = 0; i <= m; i++) {
+            twoArr[i][0] = 0;
+          }
+        }
+
+        return twoArr;
+      }
+
+      console.log(setZeroes(matrix));
+    </script>
+  </body>
+</html>
