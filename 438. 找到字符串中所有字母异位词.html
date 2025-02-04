@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let s = "cbaebabacd";
+      let p = "abc";
+      // 输出: [0,6]
+
+      function getval(str1, str2) {
+        let arr1 = str1.split(""); // 全量字符串
+        let arr2 = str2.split(""); // 用于匹配的字符串
+
+        // 先对 arr2 排序, 将其作为比较的模板
+        const target = arr2.sort().join("");
+
+        let res = [];
+
+        // 遍历 arr1 , 找到合适的子串
+        for (let i = 0; i < arr1.length; i++) {
+          // 截取的跨度范围, 不能超过 arr1 数组的长度
+          if (arr2.length + i <= arr1.length) {
+            // i每次自增1，所以加上arr2的长度，就能逐个字符向后截取字符
+            let cutArr = arr1.slice(i, arr2.length + i);
+
+            if (cutArr.sort().join("") === target) {
+              res.push(i);
+            }
+          }
+        }
+
+        return res;
+      }
+
+      console.log(getval(s, p));
+    </script>
+  </body>
+</html>
