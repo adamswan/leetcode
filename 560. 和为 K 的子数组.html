@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [1, 2, 3];
+      let k = 3;
+      //  输出：2
+
+      function getval(arr, target) {
+        let count = 0;
+
+        for (let i = 0; i < arr.length; i++) {
+          for (let j = i; j < arr.length; j++) {
+            let sum = 0;
+
+            for (let g = i; g <= j; g++) {
+              sum = sum + arr[g];
+            }
+
+            if (sum === target) {
+              count++;
+            }
+          }
+        }
+
+        return count;
+      }
+
+      console.log(getval(arr, k));
+    </script>
+  </body>
+</html>
