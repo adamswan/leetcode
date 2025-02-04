@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [-1, 0, 1, 2, -1, -4];
+      //  输出 [[-1, -1, 2], [-1, 0, 1]];
+
+      function getval(arr) {
+        if (arr.length < 3) {
+          return arr;
+        }
+        let res = [];
+
+        arr.sort((a, b) => {
+          return a - b;
+        });
+
+        for (let i = 0; i < arr.length; i++) {
+          let item = arr[i];
+
+          if (item === arr[i - 1] && i !== 0) {
+            console.log("进");
+            continue;
+          }
+
+          let left = i + 1;
+          let right = arr.length - 1;
+
+          while (left < right) {
+            let sum = item + arr[left] + arr[right];
+
+            if (sum === 0) {
+              res.push([item, arr[left], arr[right]]);
+
+              while (arr[left] === arr[left + 1] && left < right) {
+                left++;
+              }
+
+              while (arr[right] === arr[right - 1] && left < right) {
+                right--;
+              }
+
+              left++;
+              right--;
+            } else if (sum < 0) {
+              left++;
+            } else if (sum > 0) {
+              right--;
+            }
+          }
+        }
+
+        return res;
+      }
+
+      console.log(getval(arr));
+    </script>
+  </body>
+</html>
