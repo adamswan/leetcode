@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let str = "abcabcbb";
+      // 输出: 3
+
+      function getval(str) {
+        let max = 0;
+
+        let i = 0;
+
+        let arr = str.split("");
+
+        let map = new Map();
+
+        for (let j = 0; j < arr.length; j++) {
+          let item = arr[j];
+
+          if (map.has(item) && map.get(item) >= i) {
+            let old = map.get(item);
+            i = old + 1;
+            map.set(item, j);
+          } else {
+            map.set(item, j);
+          }
+
+          let current = j - i + 1;
+
+          if (current > max) {
+            max = current;
+          }
+        }
+
+        return max;
+      }
+
+      console.log(getval(str));
+    </script>
+  </body>
+</html>
