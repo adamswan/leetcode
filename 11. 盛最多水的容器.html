@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [1, 8, 6, 2, 5, 4, 8, 3, 7];
+      // 输出：49
+
+      function getval(arr) {
+        let i = 0;
+        let j = arr.length - 1;
+
+        let max = 0;
+
+        let current = 0;
+
+        // 两指针不能相遇
+        while (i < j) {
+          // 取两元素的距离，作为矩形的宽
+          let width = j - i;
+
+          // 取两元素中较小值，作为矩形的高（不能漏水）
+          let height = Math.min(arr[i], arr[j]);
+
+          // 求面积
+          current = width * height;
+
+          // 更新最大面积
+          if (current > max) {
+            max = current;
+          }
+
+          // 调整指针位置
+          if (arr[i] < arr[j]) {
+            // 当 arr[i] 较小时，说明此时 i 指向的元素较小，
+            // 故将指针向【右】移动，以寻找较大元素
+            i++;
+          } else {
+            // 当 arr[j] 较小时，说明此时 j 指向的元素较小，
+            // 故将指针向【左】移动，以寻找较大元素
+            j--;
+          }
+        }
+
+        return max;
+      }
+
+      console.log(getval(arr));
+    </script>
+  </body>
+</html>
