@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = ["eat", "tea", "tan", "ate", "nat", "bat"];
+      // 输出: [["bat"],["nat","tan"],["ate","eat","tea"]]
+
+      function getval(arr) {
+        let res = [];
+
+        let map = new Map();
+
+        for (let i = 0; i < arr.length; i++) {
+          let str = arr[i];
+
+          // map的key，是sort后的字符串
+          let tempKey = str.split("").sort().join("");
+
+          if (map.has(tempKey)) {
+            let old = map.get(tempKey);
+
+            map.set(tempKey, [str, ...old]);
+          } else {
+            map.set(tempKey, [str]);
+          }
+        }
+
+        console.log("map", map);
+
+        for (let K of map) {
+          let innerArr = K[1];
+          res.push(innerArr);
+        }
+
+        return res;
+      }
+
+      console.log("getval", getval(arr));
+    </script>
+  </body>
+</html>
