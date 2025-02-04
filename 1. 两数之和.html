@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [2, 7, 11, 15];
+      let target = 9;
+
+      function getval(arr, target) {
+        // 婚介所
+        let map = new Map();
+
+        for (let i = 0; i < arr.length; i++) {
+          // 当前自己
+          let item = arr[i];
+
+          // 另一半
+          let half = target - item;
+
+          if (map.has(half)) {
+            // 婚介所有当前自己要的另一半，取出来返回
+            let halfIndex = map.get(half);
+            return [halfIndex, i];
+          } else {
+            // 婚介所没有当前自己要的另一半，先把自己存进去
+            map.set(item, i);
+          }
+        }
+      }
+
+      console.log(getval(arr, target));
+    </script>
+  </body>
+</html>
