@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function NodeList(val) {
+        this.val = val;
+        this.next = null;
+      }
+
+      let node1 = new NodeList(1);
+      let node2 = new NodeList(2);
+      let node3 = new NodeList(3);
+      let node4 = new NodeList(4);
+      let node5 = new NodeList(5);
+
+      node1.next = node2;
+      node2.next = node3;
+      node3.next = node4;
+      node4.next = node5;
+      node5.next = node1;
+
+      function getval(head) {
+        let i = head;
+        let j = head;
+
+        while (i && j && i.next && j.next && j.next.next) {
+          i = i.next;
+          j = j.next.next;
+
+          if (i === j) {
+            return true;
+          }
+        }
+
+        return false;
+      }
+
+      console.log(getval(node1));
+    </script>
+  </body>
+</html>
