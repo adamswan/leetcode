@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function NodeList(val) {
+        this.val = val;
+        this.next = null;
+      }
+
+      let n1 = new NodeList("1");
+      let n2 = new NodeList("2");
+      let n3 = new NodeList("3");
+      let n4 = new NodeList("4");
+
+      n1.next = n2;
+      n2.next = n3;
+      n3.next = n4;
+
+      function getval(head) {
+        // 如果链表为空或只有一个节点，直接返回
+        if (head === null || head.next === null) {
+          return head;
+        }
+
+        let i = head; // 当前节点
+        let j = head.next; // 当前节点的下一个节点
+
+        // i 的 next 指向递归
+        i.next = getval(j.next);
+        // j 的 next 指向 i
+        j.next = i;
+
+        return j;
+      }
+
+      console.log("res:", getval(n1));
+    </script>
+  </body>
+</html>
