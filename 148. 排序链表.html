@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Nodelist(val) {
+        this.val = val;
+        this.next = null;
+      }
+
+      let n1 = new Nodelist(4);
+      let n2 = new Nodelist(2);
+      let n3 = new Nodelist(1);
+      let n4 = new Nodelist(3);
+      n1.next = n2;
+      n2.next = n3;
+      n3.next = n4;
+      console.log("Nodelist：", n1);
+
+      function sortList(head) {
+        let current = head;
+
+        // 存所有的 val
+        let arr = [];
+
+        while (current) {
+          arr.push(current.val);
+          current = current.next;
+        }
+
+        // 排序val
+        arr.sort((a, b) => a - b);
+        console.log("arr", arr);
+
+        let current2 = head;
+
+        // 遍历数组，替换链表中的值
+        for (let i = 0; i < arr.length; i++) {
+          let item = arr[i];
+
+          // 将链表中的值替换为数组中的已排序成员
+          current2.val = item;
+
+          // 指针向后移动
+          current2 = current2.next;
+        }
+
+        return head;
+      }
+
+      console.log("res", sortList(n1));
+    </script>
+  </body>
+</html>
