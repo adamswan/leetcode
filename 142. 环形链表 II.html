@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function NodeList(val) {
+        this.val = val;
+        this.next = null;
+      }
+
+      let node1 = new NodeList(1);
+      let node2 = new NodeList(2);
+      let node3 = new NodeList(3);
+      let node4 = new NodeList(4);
+      let node5 = new NodeList(5);
+
+      // 构建链表的线性部分
+      node1.next = node2;
+      node2.next = node3;
+      node3.next = node4;
+      node4.next = node5;
+
+      // 使链表形成环，将最后一个节点的 next 指向环的起点
+      node5.next = node3;
+
+      // console.log("Nodelist", node1);
+
+      function getval(head) {
+        let i = head;
+        let j = head;
+
+        let hasLoop = false;
+
+        while (i && j && i.next && j.next && j.next.next) {
+          i = i.next;
+          j = j.next.next;
+
+          if (i === j) {
+            hasLoop = true;
+            // 存在环了，打断循环
+            break;
+          }
+        }
+
+        if (hasLoop === false) {
+          // 没环
+          return null;
+        } else {
+          // 有环，找起点
+          // 指针 i 赋值为头节点
+          i = head;
+
+          while (i && j && i !== j) {
+            i = i.next;
+            j = j.next;
+          }
+
+          return i;
+        }
+      }
+
+      console.log(getval(node1));
+    </script>
+  </body>
+</html>
