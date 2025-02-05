@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function ListNode(val) {
+        this.val = val;
+        this.next = null;
+      }
+
+      // 链表1
+      let n1 = new ListNode(1);
+      let n2 = new ListNode(2);
+      let n3 = new ListNode(4);
+      n1.next = n2;
+      n2.next = n3;
+      console.log("list1", n1);
+
+      // 链表2
+      let n4 = new ListNode(1);
+      let n5 = new ListNode(3);
+      let n6 = new ListNode(4);
+      n4.next = n5;
+      n5.next = n6;
+      console.log("list2", n4);
+
+      function merge(head1, head2) {
+        let newList = new ListNode("fake");
+
+        let i = head1;
+        let j = head2;
+        let k = newList;
+
+        while (i && j) {
+          if (i.val < j.val) {
+            k.next = i;
+            k = k.next;
+            i = i.next;
+          } else {
+            k.next = j;
+            k = k.next;
+            j = j.next;
+          }
+        }
+
+        if (i !== null) {
+          while (i) {
+            k.next = i;
+            k = k.next;
+            i = i.next;
+          }
+        }
+
+        if (j !== null) {
+          while (j) {
+            k.next = j;
+            k = k.next;
+            j = j.next;
+          }
+        }
+
+        return newList.next;
+      }
+
+      console.log("合并", merge(n1, n4));
+    </script>
+  </body>
+</html>
