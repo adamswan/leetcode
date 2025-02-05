@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Nodelist(val) {
+        this.val = val;
+        this.next = null;
+      }
+
+      let n1 = new Nodelist(1);
+      let n2 = new Nodelist(2);
+      let n3 = new Nodelist(2);
+      let n4 = new Nodelist(1);
+
+      n1.next = n2;
+      n2.next = n3;
+      n3.next = n4;
+      console.log("链表", n1);
+
+      function getval(head) {
+        let current = head;
+        let arr = [];
+
+        while (current) {
+          arr.push(current.val);
+          current = current.next;
+        }
+
+        let i = 0;
+        let j = arr.length - 1;
+
+        while (i < j) {
+          let leftVal = arr[i];
+          let rightVal = arr[j];
+
+          if (leftVal !== rightVal) {
+            return false;
+          } else {
+            i++;
+            j--;
+          }
+        }
+
+        return true;
+      }
+
+      console.log("is:", getval(n1));
+    </script>
+  </body>
+</html>
