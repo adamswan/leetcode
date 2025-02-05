@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Nodelist(val) {
+        this.val = val;
+        this.next = null;
+      }
+
+      // 创建实例
+      let n1 = new Nodelist(1);
+      let n2 = new Nodelist(2);
+      let n3 = new Nodelist(3);
+      let n4 = new Nodelist(4);
+
+      // 给实例的 .next 属性赋值，
+      // 最后一个节点无 next , 故为 null
+      n1.next = n2;
+      n2.next = n3;
+      n3.next = n4;
+
+      //   console.log("链表", n1);
+
+      function revert(head) {
+        let current = head;
+        let prev = null;
+
+        while (current) {
+          let nextNode = current.next;
+
+          current.next = prev;
+
+          prev = current;
+
+          current = nextNode;
+        }
+
+        return prev;
+      }
+
+      console.log(revert(n1));
+    </script>
+  </body>
+</html>
