@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Nodelist(val) {
+        this.val = val;
+        this.next = null;
+      }
+
+      let n1 = new Nodelist("a1");
+      let n2 = new Nodelist("a2");
+      let n3 = new Nodelist("c1");
+      let n4 = new Nodelist("c2");
+      let n5 = new Nodelist("c3");
+
+      n1.next = n2;
+      n2.next = n3;
+      n3.next = n4;
+      n4.next = n5;
+      console.log("头1", n1);
+
+      let n6 = new Nodelist("b1");
+      let n7 = new Nodelist("b2");
+      let n8 = new Nodelist("b3");
+
+      n6.next = n7;
+      n7.next = n8;
+      n8.next = n3; // 在这里开始复用链表1的节点，才能创建出相交链表
+      console.log("头2", n6);
+
+      function getval(head1, head2) {
+        if (head1 === null || head2 === null) {
+          return null;
+        }
+        let i = head1;
+        let j = head2;
+
+        while (i !== j) {
+          if (i !== null) {
+            i = i.next;
+          } else {
+            i = head2;
+          }
+
+          if (j !== null) {
+            j = j.next;
+          } else {
+            j = head1;
+          }
+        }
+
+        return i;
+      }
+
+      console.log("res", getval(n1, n6));
+    </script>
+  </body>
+</html>
