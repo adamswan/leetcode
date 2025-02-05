@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function ListNode(val) {
+        this.val = val;
+        this.next = null;
+      }
+
+      let n1 = new ListNode(2);
+      let n2 = new ListNode(4);
+      let n3 = new ListNode(3);
+
+      n1.next = n2;
+      n2.next = n3;
+
+      let n4 = new ListNode(5);
+      let n5 = new ListNode(6);
+      let n6 = new ListNode(4);
+
+      n4.next = n5;
+      n5.next = n6;
+
+      function getval(head1, head2) {
+        let newList = new ListNode("fake");
+
+        let i = head1;
+        let j = head2;
+        let k = newList;
+
+        let curry = 0;
+
+        // 两个链表长度可以不同，所以只要有一个链表有值就能求和
+        while (i || j) {
+          // 获取数1，如果数1没有，说明链表1用完了，故用0代替
+          let num1 = 0;
+          if (i) {
+            num1 = i.val;
+          } else {
+            num1 = 0;
+          }
+
+          // 获取数2，如果数2没有，说明链表2用完了，故用0代替
+          let num2;
+          if (j) {
+            num2 = j.val;
+          } else {
+            num2 = 0;
+          }
+
+          // 求和
+          let sum = num1 + num2 + curry;
+
+          if (sum >= 10) {
+            // 如果和大于等于10，则进位
+            curry = 1;
+            let theVal = sum % 10;
+            k.next = new ListNode(theVal);
+          } else {
+            // 如果和小于10，则不进位
+            curry = 0;
+            k.next = new ListNode(sum);
+          }
+
+          k = k.next;
+
+          // 如果链表1用完了，则无需移动指针i
+          if (i) {
+            i = i.next;
+          }
+          // 如果链表2用完了，则无需移动指针j
+          if (j) {
+            j = j.next;
+          }
+
+          // 就像大数相加一样，单独处理循环结束时，currey中的有进位的情况
+          // 处理：直接将进位设置为最后一个节点，因为他就是最大值，而链表是倒序的，故可以直接放
+          if (curry === 1) {
+            k.next = new ListNode(curry);
+          }
+        }
+
+        return newList.next;
+      }
+
+      console.log("res: ", getval(n1, n4));
+    </script>
+  </body>
+</html>
