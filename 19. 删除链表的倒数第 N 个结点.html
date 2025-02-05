@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function NodeList(val) {
+        this.val = val;
+        this.next = null;
+      }
+
+      let n1 = new NodeList("a");
+      let n2 = new NodeList("b");
+      let n3 = new NodeList("c");
+      let n4 = new NodeList("d");
+
+      n1.next = n2;
+      n2.next = n3;
+      n3.next = n4;
+
+      function delNode2(head, n) {
+        let current = head;
+
+        // 累加作为 id 属性使用
+        let count = 0;
+
+        // 收集所有 id
+        let arr = [];
+
+        while (current) {
+          count++;
+
+          arr.push(count);
+
+          current.id = count;
+
+          current = current.next;
+        }
+
+        // 根据 n 获取要被删除的id
+        let delId = arr[arr.length - n];
+
+        // 虚拟节点，如果要删除的是头节点，就要用到虚拟节点
+        let fake = new NodeList("fake");
+        // 虚拟节点和链表关联起来
+        fake.next = head;
+
+        let current2 = fake;
+
+        while (current2 && current2.next) {
+          // 如何删除节点？找到被删除节点的上一个节点，将其next指向下下个节点即实现删除
+          // 如何找到上一个节点？当 current2.next.id 等于 delId 时，说明 current2.next 就是被删除节点，而current2就是上一个节点
+          if (current2.next.id === delId) {
+            current2.next = current2.next.next;
+          } else {
+            current2 = current2.next;
+          }
+        }
+
+        return fake.next;
+      }
+
+      console.log("res2: ", delNode2(n1, 2));
+    </script>
+  </body>
+</html>
