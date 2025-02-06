@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let pre = [3, 9, 20, 15, 7];
+      let mid = [9, 3, 15, 20, 7];
+
+      function TreeNode(val, left, right) {
+        this.val = val === undefined ? 0 : val;
+        this.left = left === undefined ? null : left;
+        this.right = right === undefined ? null : right;
+      }
+
+      function getval(pre, mid) {
+        if (mid.length === 0 || pre.length === 0) {
+          return null;
+        }
+
+        // 获取根节点的值(第2次执行时，就变成了子节点)
+        let rootVal = pre[0];
+
+        // 创建根节点(第2次执行时，就变成了子节点)
+        let rootNode = new TreeNode(rootVal);
+
+        // 找到根节点在中序遍历数组中的位置(第2次执行时，就变成了子节点)
+        let rootIndex = mid.findIndex((item) => {
+          return item === rootVal;
+        });
+
+        // 切出 左子树的层序遍历数组
+        let leftSonMid = mid.slice(0, rootIndex);
+
+        // 切出 左子树的先序遍历数组（1表示根节点在上面已经使用）
+        let leftSonPre = pre.slice(1, leftSonMid.length + 1);
+
+        // 右子树
+        let rightSonMid = mid.slice(rootIndex + 1);
+
+        let rightSonPre = pre.slice(leftSonMid.length + 1);
+
+        rootNode.left = getval(leftSonPre, leftSonMid);
+        rootNode.right = getval(rightSonPre, rightSonMid);
+
+        return rootNode;
+      }
+
+      console.log("res", getval(pre, mid));
+    </script>
+  </body>
+</html>
