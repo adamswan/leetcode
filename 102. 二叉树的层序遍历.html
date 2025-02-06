@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const root = {
+        val: "A",
+        left: {
+          val: "B",
+          left: {
+            val: "D",
+          },
+          right: {
+            val: "E",
+          },
+        },
+        right: {
+          val: "C",
+          right: {
+            val: "F",
+          },
+        },
+      };
+
+      function getval(node) {
+        let res = [];
+
+        // 节点不存在时，力扣要求返回空数组
+        if (!node) {
+          return [];
+        }
+
+        // 队列
+        let queue = [node];
+
+        while (queue.length !== 0) {
+          // 必须单独声明长度，因为for循环中会取队头，会导致数组长度变短
+          let len = queue.length;
+
+          // 内层数组
+          let innerArr = [];
+
+          for (let i = 0; i < len; i++) {
+            let head = queue.shift();
+
+            // 头节点的 val 放入内层数组
+            innerArr.push(head.val);
+
+            if (head.left) {
+              queue.push(head.left);
+            }
+
+            if (head.right) {
+              queue.push(head.right);
+            }
+          }
+
+          // 内层数组放入结果res
+          res.push(innerArr);
+        }
+
+        return res;
+      }
+
+      console.log(getval(root));
+    </script>
+  </body>
+</html>
