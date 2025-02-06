@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let root = {
+        val: 1,
+        left: {
+          val: 2,
+          right: {
+            val: 5,
+          },
+        },
+        right: {
+          val: 3,
+          right: {
+            val: 4,
+          },
+        },
+      };
+
+      function getVal(node) {
+        let result = [];
+
+        let twoArr = getTwoArr(node);
+
+        for (let i = 0; i < twoArr.length; i++) {
+          let arr = twoArr[i];
+          result.push(arr.at(-1));
+        }
+
+        return result;
+      }
+
+      function getTwoArr(node) {
+        let res = [];
+
+        if (!node) {
+          return [];
+        }
+
+        let queue = [node];
+
+        while (queue.length !== 0) {
+          let innerArr = [];
+
+          let len = queue.length;
+
+          for (let i = 0; i < len; i++) {
+            let head = queue.shift();
+
+            innerArr.push(head.val);
+
+            if (head.left) {
+              queue.push(head.left);
+            }
+
+            if (head.right) {
+              queue.push(head.right);
+            }
+          }
+
+          res.push(innerArr);
+        }
+
+        return res;
+      }
+
+      console.log(getVal(root));
+    </script>
+  </body>
+</html>
