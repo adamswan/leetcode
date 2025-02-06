@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let root = {
+        val: 3,
+        left: {
+          val: 5,
+          left: {
+            val: 6,
+          },
+          right: {
+            val: 2,
+            left: {
+              val: 7,
+            },
+            right: {
+              val: 4,
+            },
+          },
+        },
+        right: {
+          val: 1,
+          left: {
+            val: 0,
+          },
+          right: {
+            val: 8,
+          },
+        },
+      };
+
+      function getval(node, p, q) {
+        // 如果当前节点为 null ，直接返回
+        // 如果当前节点就是 p 或 q，也直接返回。因为符合情况1
+        if (node === null || node === p || node === q) {
+          return node;
+        }
+
+        let left = getval(node.left, p, q);
+        let right = getval(node.right, p, q);
+
+        // 符合情况2
+        if (left && right) {
+          return node;
+        }
+
+        // 符合情况3
+        if (left) {
+          return left;
+        }
+
+        // 符合情况4
+        if (right) {
+          return right;
+        }
+      }
+
+      console.log(getval(root));
+    </script>
+  </body>
+</html>
