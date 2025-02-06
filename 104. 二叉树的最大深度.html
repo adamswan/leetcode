@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let root = {
+        val: 3,
+        left: {
+          val: 9,
+        },
+        right: {
+          val: 20,
+          left: {
+            val: 15,
+          },
+          right: {
+            val: 7,
+          },
+        },
+      };
+
+      function getval(node) {
+        // 假定最大深度
+        let max = 0;
+
+        function deep(node, depth) {
+          // 节点不存在则退出
+          if (!node) {
+            return;
+          }
+
+          // 当前深度
+          let current = depth + 1;
+
+          // 尝试更新最大深度
+          if (current > max) {
+            max = current;
+          }
+
+          if (node.left) {
+            deep(node.left, current);
+          }
+
+          if (node.right) {
+            deep(node.right, current);
+          }
+        }
+
+        deep(node, 0);
+
+        return max;
+      }
+
+      console.log(getval(root));
+    </script>
+  </body>
+</html>
