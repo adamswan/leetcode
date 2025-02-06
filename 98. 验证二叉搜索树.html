@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let root = {
+        val: 2,
+        left: {
+          val: 1,
+        },
+        right: {
+          val: 3,
+        },
+      };
+
+      function getval(node) {
+        // 1、中序遍历二叉搜索树，得到递增数组
+        let arr = getArr(node);
+        console.log("arr", arr);
+
+        // 2、遍历递增数组，判断是否真的递增
+        for (let i = 0; i < arr.length; i++) {
+          // 如果 当前元素 大于或等于 下一个元素，说明不符合要求
+          if (arr[i] >= arr[i + 1]) {
+            return false;
+          }
+        }
+
+        return true;
+      }
+
+      function getArr(node) {
+        let res = [];
+
+        function deep(node) {
+          if (node.left) {
+            deep(node.left);
+          }
+
+          res.push(node.val);
+
+          if (node.right) {
+            deep(node.right);
+          }
+        }
+
+        deep(node);
+
+        return res;
+      }
+
+      console.log(getval(root));
+    </script>
+  </body>
+</html>
