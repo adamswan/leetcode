@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let root = {
+        val: 1,
+        left: {
+          val: 2,
+          left: {
+            val: 4,
+          },
+          right: {
+            val: 5,
+          },
+        },
+        right: {
+          val: 3,
+        },
+      };
+
+      function getval(node) {
+        let max = 0;
+
+        function deep(node) {
+          if (!node) {
+            return 0;
+          }
+
+          // 当前左子树深度
+          let leftDep = deep(node.left);
+
+          // 当前右子树深度
+          let rightDep = deep(node.right);
+
+          // 尝试更新左、右子树深度之和
+          let sum = leftDep + rightDep;
+          if (sum > max) {
+            max = sum;
+          }
+
+          // 取当前两树的较大值，再加 1 ，作为左/右子树的深度
+          return Math.max(leftDep, rightDep) + 1;
+        }
+
+        deep(node);
+
+        return max;
+      }
+
+      console.log(getval(root));
+    </script>
+  </body>
+</html>
