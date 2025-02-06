@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let root = {
+        val: 1,
+        left: {
+          val: 3,
+          left: {
+            val: 7,
+          },
+          right: {
+            val: 6,
+          },
+        },
+        right: {
+          val: 2,
+          left: {
+            val: 5,
+          },
+          right: {
+            val: 4,
+          },
+        },
+      };
+
+      function getval(node) {
+        if (!node) {
+          return null;
+        }
+        return {
+          val: node.val,
+          left: getval(node.right),
+          right: getval(node.left),
+        };
+      }
+
+      console.log(getval(root));
+    </script>
+  </body>
+</html>
