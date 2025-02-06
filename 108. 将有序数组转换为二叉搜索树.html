@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function TreeNode(val, left, right) {
+        this.val = val === undefined ? 0 : val;
+        this.left = left === undefined ? null : left;
+        this.right = right === undefined ? null : right;
+      }
+
+      let arr = [-10, -3, 0, 5, 9];
+
+      function getval(arr) {
+        // 左指针 i、右指针 j
+        function deep(i, j) {
+          if (i > j) {
+            // 力扣要求返回null
+            return null;
+          }
+
+          // 获取中间成员的索引，以此为起点
+          let mid = Math.floor((i + j) / 2);
+
+          // 先创建根节点，再添加 left 子树、right 子树
+          let root = new TreeNode(arr[mid]);
+
+          root.left = deep(i, mid - 1); // 从i到mid的左侧
+
+          root.right = deep(mid + 1, j); // 从mid的右侧到j
+
+          return root;
+        }
+
+        // 根据索引号生成节点
+        let node = deep(0, arr.length - 1);
+
+        return node;
+      }
+
+      console.log(getval(arr));
+    </script>
+  </body>
+</html>
