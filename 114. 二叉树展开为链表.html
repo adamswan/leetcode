@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let root = {
+        val: 1,
+        left: {
+          val: 2,
+          left: {
+            val: 3,
+          },
+          right: {
+            val: 4,
+          },
+        },
+        right: {
+          val: 5,
+          right: {
+            val: 6,
+          },
+        },
+      };
+
+      function getval(node) {
+        // 先序遍历获取一个数组，
+        // 二叉树的节点就是数组中的这些对象，它们在数组中，根据val，从小到大的排列
+        let arr = getArr(node);
+        console.log("arr", arr);
+
+        for (let i = 0; i < arr.length - 1; i++) {
+          // 当前节点
+          let currentNode = arr[i];
+
+          // 下一个节点
+          let nextNode = arr[i + 1];
+
+          // 左子树要置空
+          currentNode.left = null;
+
+          // 右子树用下一个节点充当
+          currentNode.right = nextNode;
+        }
+
+        // 单独处理最后一个节点,因为它没有左、右子树
+        let lastOne = arr.at(-1);
+        if (lastOne) {
+          lastOne.left = null;
+          lastOne.right = null;
+        }
+      }
+
+      function getArr(node) {
+        let res = [];
+
+        function deep(node) {
+          if (!node) {
+            return;
+          }
+          res.push(node);
+
+          if (node.left) {
+            deep(node.left);
+          }
+
+          if (node.right) {
+            deep(node.right);
+          }
+        }
+
+        deep(node);
+
+        return res;
+      }
+
+      getval(root);
+      // 无返回值值,看原始的root
+      console.log("res", root);
+    </script>
+  </body>
+</html>
