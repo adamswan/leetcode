@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const root = {
+        val: "A",
+        left: {
+          val: "B",
+          left: {
+            val: "D",
+          },
+          right: {
+            val: "E",
+          },
+        },
+        right: {
+          val: "C",
+          right: {
+            val: "F",
+          },
+        },
+      };
+
+      function getval(node) {
+        let res = [];
+
+        function deep(node) {
+          if (node.left) {
+            deep(node.left);
+          }
+
+          res.push(node.val);
+
+          if (node.right) {
+            deep(node.right);
+          }
+        }
+
+        deep(node);
+
+        return res;
+      }
+
+      console.log(getval(root));
+    </script>
+  </body>
+</html>
