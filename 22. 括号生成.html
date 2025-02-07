@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 输入：n = 3
+      // 输出：["((()))","(()())","(())()","()(())","()()()"]
+      let n = 3;
+
+      function getval(n) {
+        let res = [];
+
+        function deep(current, leftNum, rightNum) {
+          // 当左右括号都使用了n个时，说明得到了一个有效的括号组合，将其加入结果res
+          if (leftNum === n && rightNum === n) {
+            console.log("current", current);
+            res.push(current);
+            return;
+          }
+
+          // 如果 leftNum 小于 n ，说明还能添加左括号，那么继续加左括号
+          if (leftNum < n) {
+            deep(current + "(", leftNum + 1, rightNum);
+          }
+
+          // 如果 rightNum 小于 leftNum ，说明还能添加右括号，那么继续加右括号
+          // leftNum 左括号先添加的
+          if (rightNum < leftNum) {
+            deep(current + ")", leftNum, rightNum + 1);
+          }
+        }
+
+        deep("", 0, 0);
+
+        return res;
+      }
+
+      console.log(getval(n));
+    </script>
+  </body>
+</html>
