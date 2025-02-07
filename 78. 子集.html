@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [1, 2, 3];
+
+      function getval(arr) {
+        let res = [];
+
+        function deep(arr, currentArr) {
+          for (let i = 0; i < arr.length; i++) {
+            let num = arr[i];
+
+            let one = currentArr.find((ele) => ele === num);
+
+            if (one === undefined) {
+              let newArr = [...currentArr, num];
+
+              // 这里是唯一和全排列不同的地方，判断是否为升序数组后，
+              // 再放入结果res
+              if (isUp(newArr)) {
+                res.push(newArr);
+              }
+
+              deep(arr, newArr);
+            }
+          }
+        }
+
+        deep(arr, []);
+
+        // 空数组也算子集
+        res.push([]);
+
+        return res;
+      }
+
+      function isUp(arr) {
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i] >= arr[i + 1]) {
+            return false;
+          }
+        }
+        return true;
+      }
+
+      console.log(getval(arr));
+    </script>
+  </body>
+</html>
