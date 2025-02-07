@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [2, 3, 6, 7];
+      let target = 7;
+
+      function getval(arr, target) {
+        let res = [];
+
+        // 三个参数：原数组arr、当前组合、当前组合的和
+        function deep(arr, currentArr, currentSum) {
+          for (let i = 0; i < arr.length; i++) {
+            let item = arr[i];
+
+            let newArr = [...currentArr, item];
+
+            let newSum = currentSum + item;
+
+            if (newSum === target) {
+              // 等于了，不递归，收集结果
+              newArr.sort((a, b) => a - b);
+              res.push([...newArr]);
+            } else if (newSum > target) {
+              // 大于了，也不递归，不用收集结果
+            } else if (newSum < target) {
+              // 小于了，要递归，继续收集值
+              deep(arr, newArr, newSum);
+            }
+          }
+        }
+
+        deep(arr, [], 0);
+
+        return uniq(res);
+      }
+
+      // 用Map去重，利用了同名key会覆盖属性值的特性
+      function uniq(twoArr) {
+        let result = [];
+
+        let map = new Map();
+
+        for (let i = 0; i < twoArr.length; i++) {
+          let arr = twoArr[i];
+          let key = arr.join("");
+          map.set(key, arr);
+        }
+
+        for (let K of map) {
+          result.push(K[1]);
+        }
+
+        return result;
+      }
+
+      console.log(getval(arr, target));
+    </script>
+  </body>
+</html>
