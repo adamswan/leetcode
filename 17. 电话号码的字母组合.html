@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 数字与字母串的映射关系
+      let obj = {
+        2: "abc",
+        3: "def",
+        4: "ghi",
+        5: "jkl",
+        6: "mno",
+        7: "pqrs",
+        8: "tuv",
+        9: "wxyz",
+      };
+
+      function getval(digits) {
+        // 力扣的边界条件
+        if (digits.length === 0) {
+          return [];
+        }
+
+        let res = [];
+
+        // 数字拆为数组
+        digits = digits.split("");
+
+        function deep(digits, currentArr, index) {
+          // 取数字的索引号，不能超过 digits 本身的最大索引
+          if (index > digits.length - 1) {
+            return;
+          }
+
+          // 根据当前数字的索引号，找到对应的字母串，并拆分为数组
+          let num = digits[index];
+          let arr = obj[num].split("");
+
+          for (let i = 0; i < arr.length; i++) {
+            let item = arr[i];
+
+            // 构建新的字母数组
+            let newArr = [...currentArr, item];
+
+            // 如果达到拨号数字的长度，则转换为字符，放入结果res
+            if (newArr.length === digits.length) {
+              let str = newArr.join("");
+              res.push(str);
+            }
+
+            // 递归
+            deep(digits, newArr, index + 1);
+          }
+        }
+
+        deep(digits, [], 0);
+
+        return res;
+      }
+
+      console.log(getval("23"));
+    </script>
+  </body>
+</html>
