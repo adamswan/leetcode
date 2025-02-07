@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let str = "aab";
+
+      function getval(str) {
+        let res = [];
+        let arr = str.split("");
+
+        function deep(arr, startIndex, currentArr) {
+          for (let i = startIndex; i < arr.length; i++) {
+            let cut = arr.slice(startIndex, i + 1).join("");
+            console.log("关系", cut, startIndex, i + 1);
+
+            if (isLoop(cut)) {
+              let newArr = [...currentArr, cut];
+
+              let newStartIndex = i + 1;
+
+              if (newStartIndex === arr.length) {
+                res.push(newArr);
+              }
+
+              deep(arr, newStartIndex, newArr);
+            }
+          }
+        }
+
+        deep(arr, 0, []);
+
+        return res;
+      }
+
+      function isLoop(str) {
+        let arr = str.split("").reverse();
+        if (arr.join("") === str) {
+          return true;
+        }
+        return false;
+      }
+
+      console.log(getval(str));
+    </script>
+  </body>
+</html>
