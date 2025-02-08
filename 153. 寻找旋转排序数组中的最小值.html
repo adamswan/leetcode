@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [3, 4, 5, 1, 2];
+      // 输出：1
+
+      function getval(arr) {
+        let newArr = [...arr];
+
+        while (true) {
+          let delOne = newArr.shift();
+          newArr.push(delOne);
+
+          if (isUp(newArr)) {
+            break;
+          }
+        }
+
+        return newArr[0];
+      }
+
+      // 判断数组是否升序
+      function isUp(arr) {
+        for (let i = 0; i < arr.length; i++) {
+          if (arr[i] >= arr[i + 1]) {
+            return false;
+          }
+        }
+        return true;
+      }
+
+      console.log(getval(arr));
+    </script>
+  </body>
+</html>
