@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 索引：  [0,  1,  2,  3,  4,  5,  6,  7]
+      let arr = [73, 74, 75, 71, 69, 72, 76, 73];
+
+      // 输出相差天数: [1,  1,  4,  2,  1,  1,  0,  0];
+
+      // 解法1：用栈
+      function getval(arr) {
+        let res = new Array(arr.length).fill(0);
+        let stack = [];
+
+        for (let i = 0; i < arr.length; i++) {
+          let item = arr[i];
+
+          while (stack.length !== 0 && item > arr[stack.at(-1)]) {
+            let topIndex = stack.pop();
+            let day = i - topIndex;
+            res[topIndex] = day;
+          }
+
+          stack.push(i);
+        }
+
+        return res;
+      }
+      console.log(getval(arr));
+
+      // 解法2：双重for循环
+      function getval2(arr) {
+        let res = new Array(arr.length).fill(0);
+
+        for (let i = 0; i < arr.length; i++) {
+          let item = arr[i];
+          for (let j = i + 1; j < arr.length; j++) {
+            // 在 arr[j] 中，如果找到了比 arr[i] 高的第1个温度时，立刻 break 掉内层循环
+            // 因为有了第1个就满足题意了
+            if (arr[j] > arr[i]) {
+              let day = j - i;
+              res[i] = day;
+              break;
+            }
+          }
+        }
+
+        return res;
+      }
+      console.log(getval2(arr));
+    </script>
+  </body>
+</html>
