@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [2, 3, 1, 1, 4]; // 输出：true
+      let arr2 = [3, 2, 1, 0, 4]; // 输出：false
+
+      function getval(arr) {
+        let maxReachIndex = 0; // 假定能达到的最远位置
+
+        for (let i = 0; i < arr.length; i++) {
+          let num = arr[i];
+
+          // 如果当前的最远位置 maxReachIndex 小于了 当前的 i
+          // 说明无法到达当前 i 的位置
+          if (maxReachIndex < i) {
+            return false;
+          }
+
+          // 当前能到达的地方：当前索引 + 当前数
+          let currentIndex = i + num;
+
+          // 尝试更新 maxReachIndex
+          if (currentIndex > maxReachIndex) {
+            maxReachIndex = currentIndex;
+          }
+
+          // 如果能达到的最远位置 超过or等于了 最后一个成员的索引，
+          // 意味着能走到最后一个成员
+          if (maxReachIndex >= arr.length - 1) {
+            return true;
+          }
+        }
+
+        return false;
+      }
+
+      console.log(getval(arr));
+      console.log(getval(arr2));
+    </script>
+  </body>
+</html>
