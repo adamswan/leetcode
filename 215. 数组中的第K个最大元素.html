@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [3, 2, 1, 5, 6, 4];
+      let k = 2;
+
+      function getval(arr, k) {
+        function qs(arr) {
+          if (arr.length === 1 || arr.length === 0) {
+            return arr;
+          }
+
+          let base = arr[0];
+          let lessThan = [];
+          let moreThan = [];
+          let same = [];
+
+          for (let i = 0; i < arr.length; i++) {
+            let item = arr[i];
+
+            if (item < base) {
+              lessThan.push(item);
+            } else if (item > base) {
+              moreThan.push(item);
+            } else {
+              same.push(item);
+            }
+          }
+
+          let part1 = qs(lessThan);
+          let part2 = qs(moreThan);
+
+          return [...part1, ...same, ...part2];
+        }
+
+        let sorted = qs(arr);
+        return sorted[arr.length - k];
+      }
+
+      console.log(getval(arr, k));
+    </script>
+  </body>
+</html>
