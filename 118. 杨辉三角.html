@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function getval(row) {
+        let twoArr = [];
+
+        for (let i = 0; i < row; i++) {
+          // 生成内层数组，初始值用 1 填充
+          let innerArr = new Array(i + 1).fill(1);
+
+          for (let j = 0; j < innerArr.length; j++) {
+            // 第一个元素、最后一个元素保持数1不变
+            if (j !== 0 && j !== innerArr.length - 1) {
+              // 修改内层数组除首、尾元素外的其余元素
+              // 当前元素 =  二维数组的上一行(i-1)的第 j 个元素 + 二维数组的上一行(i-1)的第 j-1 个元素
+              innerArr[j] = twoArr[i - 1][j] + twoArr[i - 1][j - 1];
+            }
+          }
+
+          twoArr.push(innerArr);
+        }
+
+        return twoArr;
+      }
+
+      console.log(getval(3));
+    </script>
+  </body>
+</html>
