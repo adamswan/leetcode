@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [2, 3, 1, 1, 4];
+      // 输出: 2
+
+      function getval(arr) {
+        // 假定能到达的【最远】位置（索引号）
+        let maxGoIndex = 0;
+
+        // 跳的次数
+        let count = 0;
+
+        // 当前跳跃结束时, 所到达的位置(起始为 0 ,因为开始在索引 0 处)
+        let endIndex = 0;
+
+        // 最后一个成员不需要遍历
+        for (let i = 0; i < arr.length - 1; i++) {
+          let item = arr[i];
+
+          // 当前达到的位置（索引号）
+          let currentGoIndex = i + item;
+          // 尝试更新能到达的【最远】位置
+          if (currentGoIndex > maxGoIndex) {
+            maxGoIndex = currentGoIndex;
+          }
+
+          // 当 i 等于 endIndex 时,说明可以跳了
+          if (i === endIndex) {
+            // 跳一次,累计一次
+            count++;
+
+            // 假定最大值给 endIndex, 是下次跳的基础
+            endIndex = maxGoIndex;
+
+            console.log("跳");
+          }
+        }
+
+        return count;
+      }
+
+      console.log(getval(arr));
+    </script>
+  </body>
+</html>
