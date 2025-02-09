@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [7, 7, 7, 7, 9, 9, 1, 1, 1, 3];
+      let k = 2;
+      // 输出: [7, 1];
+
+      function getval(arr, k) {
+        let res = [];
+        let map = new Map();
+
+        // 创建 Map，数字为 key，出现次数为 val
+        for (let i = 0; i < arr.length; i++) {
+          let item = arr[i];
+
+          if (map.has(item)) {
+            let old = map.get(item);
+            map.set(item, old + 1);
+          } else {
+            map.set(item, 1);
+          }
+        }
+
+        let objArr = [];
+        // 根据 Map，创建对象数组
+        for (let K of map) {
+          objArr.push({
+            count: K[1], // 出现次数
+            num: K[0], // 出现次数对应的数字
+          });
+        }
+
+        // 根据出现次数排序对象数组，倒序排列，出现次数多的在前面，方便下一步取值
+        objArr.sort((a, b) => b.count - a.count);
+        console.log("objArr", objArr);
+
+        // 因为上一步的sort是根据count降序排列，
+        // 所有出现次数多的元素，在数组的前面，根据传入的 k 决定遍历次数
+        for (let i = 0; i < k; i++) {
+          let item = objArr[i];
+          res.push(item.num);
+        }
+
+        return res;
+      }
+
+      console.log(getval(arr, k));
+    </script>
+  </body>
+</html>
