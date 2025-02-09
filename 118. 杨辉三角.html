@@ -15,12 +15,14 @@
           let innerArr = new Array(i + 1).fill(1);
 
           for (let j = 0; j < innerArr.length; j++) {
-            // 第一个元素、最后一个元素保持数1不变
-            if (j !== 0 && j !== innerArr.length - 1) {
-              // 修改内层数组除首、尾元素外的其余元素
-              // 当前元素 =  二维数组的上一行(i-1)的第 j 个元素 + 二维数组的上一行(i-1)的第 j-1 个元素
-              innerArr[j] = twoArr[i - 1][j] + twoArr[i - 1][j - 1];
+            // 遇到第一个元素、最后一个元素时，跳过本次循环，因为首尾要保持数 1 不变
+            if (j === 0 || j === innerArr.length - 1) {
+              continue;
             }
+
+            // 修改内层数组除首、尾元素外的其余元素
+            // 当前元素 =  二维数组的上一行(i-1)的第 j 个元素 + 二维数组的上一行(i-1)的第 j-1 个元素
+            innerArr[j] = twoArr[i - 1][j] + twoArr[i - 1][j - 1];
           }
 
           twoArr.push(innerArr);
@@ -29,7 +31,7 @@
         return twoArr;
       }
 
-      console.log(getval(3));
+      console.log(getval(5));
     </script>
   </body>
 </html>
