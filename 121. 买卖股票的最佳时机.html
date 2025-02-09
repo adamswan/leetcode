@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [7, 1, 5, 3, 6, 4];
+      //  输出：5
+
+      function getval(arr) {
+        let maxProfit = 0;
+        let lowestPrice = 99999;
+
+        for (let i = 0; i < arr.length; i++) {
+          let price = arr[i];
+
+          // 尝试更新假定最低价
+          if (price < lowestPrice) {
+            lowestPrice = price;
+          }
+
+          // 用当前价格 减去 历史最低价，得到当前利润
+          let currentProfit = price - lowestPrice;
+
+          // 尝试更新最大利润
+          if (currentProfit > maxProfit) {
+            maxProfit = currentProfit;
+          }
+        }
+
+        return maxProfit;
+      }
+
+      console.log(getval(arr));
+    </script>
+  </body>
+</html>
