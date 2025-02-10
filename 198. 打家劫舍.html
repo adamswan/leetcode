@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [1, 2, 3, 1];
+
+      function getval(arr) {
+        if (arr.length === 0) {
+          return 0;
+        }
+
+        let money = [0, arr[0]];
+
+        for (let i = 2; i <= arr.length; i++) {
+          // 取情况1和情况2 的较大值，作为当前能偷的最大钱 Math.max(情况1，情况2)
+          money[i] = Math.max(money[i - 1], money[i - 2] + arr[i - 1]);
+        }
+
+        console.log("money", money);
+
+        return money.at(-1);
+      }
+
+      console.log(getval(arr));
+    </script>
+  </body>
+</html>
