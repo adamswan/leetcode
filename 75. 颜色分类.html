@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [2, 0, 2, 1, 1, 0];
+      //  输出：[0, 0, 1, 1, 2, 2]
+
+      let arr2 = [1, 2, 0];
+      //  输出：[0, 1, 2]
+
+      function getval(arr) {
+        let i = 0; // 指向每个成员
+        let to0 = 0; // 指向数字 0
+        let to2 = arr.length - 1; // 指向数字 2
+
+        while (to0 <= i && i <= to2) {
+          if (arr[i] === 0) {
+            [arr[i], arr[to0]] = [arr[to0], arr[i]];
+            i++;
+            to0++;
+          } else if (arr[i] === 1) {
+            i++;
+          } else if (arr[i] === 2) {
+            [arr[to2], arr[i]] = [arr[i], arr[to2]];
+            to2--;
+            // i++; 这里不能移动指针 i，这会导致 while 循环少执行一次
+          }
+        }
+
+        return arr;
+      }
+
+      console.log(getval(arr2));
+    </script>
+  </body>
+</html>
