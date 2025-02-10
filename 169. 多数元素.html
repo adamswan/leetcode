@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let arr = [1, 2, 3, 2, 2, 2, 5, 4, 2];
+
+      function getval(arr) {
+        let half = arr.length / 2;
+        let map = new Map();
+
+        for (let i = 0; i < arr.length; i++) {
+          let item = arr[i];
+
+          if (map.has(item)) {
+            let old = map.get(item);
+            map.set(item, old + 1);
+          } else {
+            map.set(item, 1);
+          }
+        }
+        console.log("map", map);
+
+        for (let K of map) {
+          let count = K[1];
+          if (count > half) {
+            return K[0];
+          }
+        }
+      }
+
+      console.log(getval(arr));
+    </script>
+  </body>
+</html>
